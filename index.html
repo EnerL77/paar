@@ -1,0 +1,628 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Paar-Intensiv – Klarheit in einem Tag</title>
+  <meta name="description" content="Ein moderierter Paar-Intensivtag – strukturiert, ruhig, professionell. Im Team mit einer approbierten Psychotherapeutin." />
+
+  <style>
+    :root{
+      --bg: #faf8f5;
+      --card: rgba(255,255,255,.72);
+      --ink: #141618;
+      --muted: #525a60;
+      --line: rgba(20,22,24,.10);
+      --brand: #0f2f2f;
+      --accent: #2b6a62;
+      --warn: #7a2e2e;
+      --radius: 22px;
+      --shadow: 0 10px 30px rgba(0,0,0,.08);
+      --maxw: 1120px;
+    }
+
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      background: radial-gradient(1200px 600px at 20% 10%, rgba(43,106,98,.10), transparent 60%),
+                  radial-gradient(900px 500px at 90% 0%, rgba(15,47,47,.10), transparent 55%),
+                  var(--bg);
+      color:var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Inter, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+
+    a{ color:inherit; text-decoration:none; }
+    .container{ max-width:var(--maxw); margin:0 auto; padding: clamp(18px, 3vw, 34px); }
+
+    /* Topbar */
+    .topbar{
+      position: sticky; top:0;
+      backdrop-filter: blur(10px);
+      background: rgba(250,248,245,.75);
+      border-bottom: 1px solid var(--line);
+      z-index: 10;
+    }
+    .topbar-inner{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:16px;
+      padding: 12px 0;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      letter-spacing:.2px;
+    }
+    .mark{
+      width:34px; height:34px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(43,106,98,.95), rgba(15,47,47,.95));
+      box-shadow: 0 10px 20px rgba(15,47,47,.12);
+      position:relative;
+    }
+    .mark:before{
+      content:"";
+      position:absolute; inset:9px 9px 9px 9px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.55);
+      opacity:.9;
+    }
+    .brand strong{ font-weight: 650; }
+    .nav{
+      display:flex; align-items:center; gap:14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .nav a{ padding:8px 10px; border-radius: 12px; }
+    .nav a:hover{ background: rgba(20,22,24,.05); color: var(--ink); }
+
+    /* Buttons */
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding: 12px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.65);
+      box-shadow: 0 1px 0 rgba(0,0,0,.02);
+      font-weight: 600;
+      font-size: 14px;
+      transition: transform .08s ease, background .2s ease, border-color .2s ease;
+      white-space:nowrap;
+    }
+    .btn:hover{ background: rgba(255,255,255,.85); border-color: rgba(20,22,24,.18); transform: translateY(-1px); }
+    .btn-primary{
+      background: linear-gradient(135deg, rgba(43,106,98,.98), rgba(15,47,47,.98));
+      color: #fff;
+      border-color: rgba(255,255,255,.12);
+      box-shadow: 0 18px 40px rgba(15,47,47,.18);
+    }
+    .btn-primary:hover{
+      transform: translateY(-1px);
+      box-shadow: 0 22px 55px rgba(15,47,47,.24);
+    }
+    .btn-ghost{
+      background: transparent;
+      border-color: rgba(20,22,24,.14);
+      color: var(--ink);
+    }
+
+    /* Hero */
+    .hero{
+      padding: clamp(22px, 4vw, 44px) 0 10px;
+    }
+    .hero-grid{
+      display:grid;
+      grid-template-columns: 1.3fr .9fr;
+      gap: clamp(18px, 3vw, 28px);
+      align-items: stretch;
+    }
+    .headline{
+      font-size: clamp(30px, 4vw, 52px);
+      line-height: 1.05;
+      letter-spacing: -0.6px;
+      margin: 0 0 12px;
+    }
+    .subhead{
+      font-size: clamp(16px, 1.8vw, 18px);
+      color: var(--muted);
+      margin: 0 0 18px;
+      max-width: 58ch;
+    }
+    .hero-actions{
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center;
+      margin-top: 14px;
+    }
+    .meta{
+      margin-top: 16px;
+      display:flex; flex-wrap:wrap; gap:8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .pill{
+      display:inline-flex; align-items:center;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.55);
+      gap:8px;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:99px;
+      background: var(--accent);
+      box-shadow: 0 0 0 3px rgba(43,106,98,.12);
+    }
+
+    .panel{
+      border: 1px solid var(--line);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: clamp(16px, 2.4vw, 22px);
+      overflow:hidden;
+      position:relative;
+    }
+    .panel:after{
+      content:"";
+      position:absolute; inset:-1px;
+      background: radial-gradient(600px 260px at 20% 0%, rgba(43,106,98,.16), transparent 60%),
+                  radial-gradient(520px 240px at 90% 0%, rgba(15,47,47,.12), transparent 55%);
+      pointer-events:none;
+      opacity:.85;
+      mask: linear-gradient(#000, transparent 75%);
+    }
+
+    .panel h3{ margin: 0 0 10px; font-size: 15px; letter-spacing:.2px; }
+    .panel p{ margin: 0 0 12px; color: var(--muted); font-size: 14px; }
+    .key{
+      display:grid; gap:10px;
+      margin-top: 14px;
+    }
+    .key .row{
+      display:flex; gap:10px; align-items:flex-start;
+      padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(20,22,24,.10);
+      background: rgba(255,255,255,.55);
+    }
+    .ico{
+      width:34px; height:34px; border-radius: 12px;
+      background: rgba(43,106,98,.10);
+      border: 1px solid rgba(43,106,98,.18);
+      flex: 0 0 auto;
+      display:grid; place-items:center;
+      color: var(--brand);
+      font-weight:700;
+      font-size: 14px;
+    }
+    .row strong{ display:block; font-size: 14px; margin-bottom: 2px; }
+    .row span{ display:block; font-size: 13px; color: var(--muted); }
+
+    /* Sections */
+    section{ padding: 26px 0; }
+    .section-title{
+      margin:0 0 10px;
+      font-size: 22px;
+      letter-spacing:-0.2px;
+    }
+    .section-sub{
+      margin:0 0 18px;
+      color: var(--muted);
+      max-width: 70ch;
+    }
+
+    .grid-3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .grid-2{
+      display:grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    .card{
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.60);
+      border-radius: var(--radius);
+      padding: 18px;
+      box-shadow: 0 8px 22px rgba(0,0,0,.06);
+    }
+    .card h4{ margin:0 0 8px; font-size: 16px; }
+    .card p{ margin:0; color: var(--muted); font-size: 14px; }
+    .list{
+      margin: 12px 0 0;
+      padding: 0;
+      list-style:none;
+      display:grid;
+      gap: 10px;
+    }
+    .list li{
+      display:flex; gap:10px; align-items:flex-start;
+      padding: 10px 12px;
+      border-radius: 16px;
+      border: 1px solid rgba(20,22,24,.10);
+      background: rgba(255,255,255,.55);
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .check{
+      width:20px; height:20px; border-radius: 7px;
+      background: rgba(43,106,98,.12);
+      border: 1px solid rgba(43,106,98,.18);
+      flex:0 0 auto;
+      margin-top: 1px;
+      position:relative;
+    }
+    .check:after{
+      content:"";
+      position:absolute;
+      left:6px; top:3px;
+      width:6px; height:10px;
+      border-right:2px solid rgba(15,47,47,.85);
+      border-bottom:2px solid rgba(15,47,47,.85);
+      transform: rotate(35deg);
+    }
+    .x{
+      width:20px; height:20px; border-radius: 7px;
+      background: rgba(122,46,46,.10);
+      border: 1px solid rgba(122,46,46,.18);
+      flex:0 0 auto;
+      margin-top: 1px;
+      position:relative;
+    }
+    .x:before,.x:after{
+      content:"";
+      position:absolute; left:5px; top:9px;
+      width:10px; height:2px;
+      background: rgba(122,46,46,.85);
+      border-radius: 99px;
+    }
+    .x:before{ transform: rotate(45deg); }
+    .x:after{ transform: rotate(-45deg); }
+
+    /* Timeline */
+    .steps{
+      display:grid; gap:10px;
+    }
+    .step{
+      display:flex; gap:12px; align-items:flex-start;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.60);
+    }
+    .num{
+      width:34px; height:34px; border-radius: 12px;
+      background: linear-gradient(135deg, rgba(43,106,98,.14), rgba(15,47,47,.10));
+      border: 1px solid rgba(20,22,24,.10);
+      display:grid; place-items:center;
+      font-weight: 700;
+      color: var(--brand);
+      flex:0 0 auto;
+    }
+    .step strong{ display:block; margin-bottom: 2px; }
+    .step span{ color: var(--muted); font-size: 14px; display:block; }
+
+    /* Pricing/CTA */
+    .cta{
+      border: 1px solid rgba(20,22,24,.12);
+      background: linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.55));
+      border-radius: calc(var(--radius) + 4px);
+      padding: 22px;
+      box-shadow: 0 16px 44px rgba(0,0,0,.10);
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 16px;
+      align-items:center;
+    }
+    .price{
+      font-size: 26px;
+      letter-spacing: -0.4px;
+      margin: 8px 0 0;
+    }
+    .fine{
+      font-size: 12.5px;
+      color: var(--muted);
+      margin: 10px 0 0;
+      line-height: 1.4;
+    }
+
+    /* Footer */
+    footer{
+      padding: 26px 0 44px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+    .footer-grid{
+      display:flex; flex-wrap:wrap; gap:10px 16px;
+      border-top: 1px solid var(--line);
+      padding-top: 16px;
+      justify-content: space-between;
+    }
+    .footer-grid a{ color: var(--muted); text-decoration: underline; text-underline-offset: 3px; }
+    .footer-grid a:hover{ color: var(--ink); }
+
+    /* Responsive */
+    @media (max-width: 920px){
+      .hero-grid{ grid-template-columns: 1fr; }
+      .cta{ grid-template-columns: 1fr; }
+      .grid-3{ grid-template-columns: 1fr; }
+      .grid-2{ grid-template-columns: 1fr; }
+      .nav{ display:none; }
+    }
+
+    /* Reduce motion */
+    @media (prefers-reduced-motion: reduce){
+      .btn{ transition:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-inner">
+        <div class="brand" aria-label="Marke">
+          <div class="mark" aria-hidden="true"></div>
+          <div>
+            <strong>Paar-Intensiv</strong><br />
+            <span style="color:var(--muted);font-size:12.5px;">Moderiert. Strukturiert. Professionell.</span>
+          </div>
+        </div>
+
+        <nav class="nav" aria-label="Navigation">
+          <a href="#format">Format</a>
+          <a href="#setup">Team</a>
+          <a href="#ablauf">Ablauf</a>
+          <a href="#preis">Preis</a>
+        </nav>
+
+        <a class="btn btn-primary" href="#kontakt">Erstgespräch anfragen</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="container">
+    <!-- HERO -->
+    <header class="hero">
+      <div class="hero-grid">
+        <div>
+          <h1 class="headline">Wenn Reden nicht mehr weiterhilft – aber Aufgeben noch keine Option ist.</h1>
+          <p class="subhead">
+            Ein <strong>moderierter Paar-Intensivtag</strong>, der festgefahrene Gespräche entwirrt und Entscheidungen möglich macht.
+            Im Team mit einer <strong>approbierten Psychotherapeutin</strong>.
+          </p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#kontakt">Erstgespräch anfragen (20 Min)</a>
+            <a class="btn btn-ghost" href="#format">So funktioniert’s</a>
+          </div>
+
+          <div class="meta" role="list" aria-label="Hinweise">
+            <span class="pill" role="listitem"><span class="dot" aria-hidden="true"></span> Privat • Diskret • begrenzte Plätze</span>
+            <span class="pill" role="listitem">Keine Kassenleistung</span>
+            <span class="pill" role="listitem">1 Tag oder 2 Halbtage</span>
+          </div>
+        </div>
+
+        <aside class="panel" aria-label="Worum es geht">
+          <h3>Worum es hier wirklich geht</h3>
+          <p>
+            Nicht um Schuld. Nicht um „Wer hat recht“. Sondern um Klarheit:
+            Was läuft zwischen euch ab – und was braucht es, damit Veränderung möglich wird?
+          </p>
+
+          <div class="key" aria-label="Kernelemente">
+            <div class="row">
+              <div class="ico" aria-hidden="true">K</div>
+              <div>
+                <strong>Klarer Rahmen</strong>
+                <span>Strukturierte Gesprächsführung statt Endlosschleifen.</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="ico" aria-hidden="true">R</div>
+              <div>
+                <strong>Ruhiger Prozess</strong>
+                <span>Entschleunigt, fokussiert, ohne Drama – aber nicht weichgespült.</span>
+              </div>
+            </div>
+            <div class="row">
+              <div class="ico" aria-hidden="true">E</div>
+              <div>
+                <strong>Entscheidungsfähigkeit</strong>
+                <span>Am Ende steht Orientierung: weiter, anders, oder klar getrennt.</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </header>
+
+    <!-- PROBLEM -->
+    <section id="format" aria-label="Format">
+      <h2 class="section-title">Ein Tag. Ein klarer Rahmen. Eine Entscheidung.</h2>
+      <p class="section-sub">
+        Viele Paare reden viel – und es kommt trotzdem nichts an. Eskalation oder Rückzug wechseln sich ab.
+        Der Paar-Intensivtag bündelt das Wesentliche in einem kompakten, professionell begleiteten Prozess.
+      </p>
+
+      <div class="grid-3" role="list" aria-label="Formatvorteile">
+        <div class="card" role="listitem">
+          <h4>Verdichtung statt Marathon</h4>
+          <p>Keine monatelangen Sitzungen – wir arbeiten konzentriert an den entscheidenden Punkten.</p>
+        </div>
+        <div class="card" role="listitem">
+          <h4>Struktur im Gespräch</h4>
+          <p>Klare Regeln, klare Phasen, klare Sprache. Weniger Trigger, mehr Verständnis.</p>
+        </div>
+        <div class="card" role="listitem">
+          <h4>Transfer in den Alltag</h4>
+          <p>Was ihr erkennt, muss auch lebbar werden: konkrete Vereinbarungen, nächste Schritte.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TEAM / SETUP -->
+    <section id="setup" aria-label="Team Setup">
+      <h2 class="section-title">Zwei Perspektiven. Ein gemeinsamer Prozess.</h2>
+      <p class="section-sub">
+        Die Rollen sind bewusst klar getrennt: therapeutische Leitung und fachliche Verantwortung auf der einen Seite,
+        Moderation und Struktur auf der anderen.
+      </p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h4>Approbierte Psychotherapeutin / Psychiaterin</h4>
+          <ul class="list" aria-label="Aufgaben therapeutische Leitung">
+            <li><span class="check" aria-hidden="true"></span> Therapeutische Leitung & fachliche Verantwortung</li>
+            <li><span class="check" aria-hidden="true"></span> Einordnung von Dynamiken, Eskalationsmustern, Grenzen</li>
+            <li><span class="check" aria-hidden="true"></span> Sicherheit bei hoher Belastung / starker Eskalation</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4>Moderator & Strukturgeber (Creative Director)</h4>
+          <ul class="list" aria-label="Aufgaben Moderation">
+            <li><span class="check" aria-hidden="true"></span> Gesprächsstruktur, Verständlichkeit, Redeanteile</li>
+            <li><span class="check" aria-hidden="true"></span> Übersetzung: Emotion → Sprache → Handlung</li>
+            <li><span class="check" aria-hidden="true"></span> Fokus auf Vereinbarungen & Umsetzung im Alltag</li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="fine">
+        Hinweis: Die therapeutische Verantwortung liegt bei der approbierten Psychotherapeutin. Dieses Angebot ist privat und nicht als Kassenleistung vorgesehen.
+      </p>
+    </section>
+
+    <!-- FIT -->
+    <section aria-label="Eignung">
+      <h2 class="section-title">Für wen es passt – und für wen nicht</h2>
+      <p class="section-sub">
+        Der Intensivtag funktioniert, wenn beide bereit sind, sich ernsthaft einzulassen. Nicht perfekt – aber ehrlich.
+      </p>
+
+      <div class="grid-2">
+        <div class="card">
+          <h4>Geeignet, wenn …</h4>
+          <ul class="list">
+            <li><span class="check" aria-hidden="true"></span> ihr feststeckt, aber grundsätzlich noch wollt</li>
+            <li><span class="check" aria-hidden="true"></span> Gespräche eskalieren oder im Kreis laufen</li>
+            <li><span class="check" aria-hidden="true"></span> ihr Klarheit sucht – nicht Schuldige</li>
+            <li><span class="check" aria-hidden="true"></span> ihr konkrete nächste Schritte wollt</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h4>Nicht geeignet, wenn …</h4>
+          <ul class="list">
+            <li><span class="x" aria-hidden="true"></span> eine Person innerlich bereits entschieden hat zu gehen</li>
+            <li><span class="x" aria-hidden="true"></span> akute Gewalt, Abhängigkeit oder schwere Krisen im Vordergrund stehen</li>
+            <li><span class="x" aria-hidden="true"></span> ihr eine laufende, langfristige Paartherapie erwartet</li>
+            <li><span class="x" aria-hidden="true"></span> ihr „nur mal schauen“ wollt, ohne Commitment</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESS -->
+    <section id="ablauf" aria-label="Ablauf">
+      <h2 class="section-title">Ablauf</h2>
+      <p class="section-sub">
+        Transparent, überschaubar, ohne Überraschungen. Der Prozess ist bewusst begrenzt.
+      </p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="num" aria-hidden="true">1</div>
+          <div>
+            <strong>Erstgespräch (20 Minuten)</strong>
+            <span>Kurzer Check: Passt das Format zu eurer Situation? Was ist das Ziel?</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num" aria-hidden="true">2</div>
+          <div>
+            <strong>Vorklärung</strong>
+            <span>Kurzes Onboarding: Themen, Grenzen, Erwartungen. Damit der Intensivtag fokussiert ist.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num" aria-hidden="true">3</div>
+          <div>
+            <strong>Paar-Intensiv</strong>
+            <span>1 Tag (6–8h) oder 2 Halbtage. Strukturierte Phasen, Moderation, klare Vereinbarungen.</span>
+          </div>
+        </div>
+        <div class="step">
+          <div class="num" aria-hidden="true">4</div>
+          <div>
+            <strong>Optionales Follow-up</strong>
+            <span>Nach 2–4 Wochen: Check-in, Feinjustierung, Stabilisierung der Umsetzung.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING / CTA -->
+    <section id="preis" aria-label="Preis und Kontakt">
+      <div class="cta" id="kontakt">
+        <div>
+          <h2 class="section-title" style="margin:0;">Verfügbarkeit & Erstgespräch</h2>
+          <p class="section-sub" style="margin:8px 0 0;">
+            Wir versprechen keine Rettung. Wir versprechen Klarheit – und einen professionellen Raum,
+            in dem Entscheidungen möglich werden.
+          </p>
+
+          <p class="price"><strong>1.800 – 2.800 €</strong> <span style="color:var(--muted);font-size:14px;">pro Paar</span></p>
+          <p class="fine">
+            Abhängig von Umfang (1 Tag vs. 2 Halbtage) und optionalem Follow-up. Privatleistung, diskret, begrenzte Plätze.
+          </p>
+        </div>
+
+        <div class="card" style="margin:0;">
+          <h4 style="margin:0 0 10px;">Kontakt</h4>
+
+          <!-- Option A: Mailto (schnellster Start) -->
+          <a class="btn btn-primary" style="width:100%; margin-bottom:10px;"
+             href="mailto:hallo@deine-domain.de?subject=Erstgespr%C3%A4ch%20Paar-Intensiv&body=Hallo%2C%0A%0Awir%20m%C3%B6chten%20ein%20Erstgespr%C3%A4ch%20anfragen.%0A%0AName%3A%0AStadt%3A%0A1%E2%80%932%20S%C3%A4tze%20zur%20Situation%3A%0AWunschtermin%20(Zeitraum)%3A%0A%0AViele%20Gr%C3%BC%C3%9Fe">
+            Erstgespräch per E-Mail anfragen
+          </a>
+
+          <!-- Option B: Mini-Formular (ohne Backend; für echtes Absenden Backend ergänzen) -->
+          <form onsubmit="event.preventDefault(); alert('Danke! Bitte nutze den E-Mail-Button oder integriere ein Backend (z.B. Formspree).');">
+            <label style="display:block; font-size:12.5px; color:var(--muted); margin:10px 0 6px;">Kurzinfo (optional)</label>
+            <textarea rows="4" style="width:100%; padding:12px; border-radius:14px; border:1px solid var(--line); background:rgba(255,255,255,.7); font:inherit;"
+              placeholder="1–2 Sätze: Worum geht es? Was ist euer Ziel?"></textarea>
+            <button class="btn" style="width:100%; margin-top:10px;" type="submit">Formular nutzen (Backend nötig)</button>
+          </form>
+
+          <p class="fine" style="margin-top:12px;">
+            Tipp: Für ein echtes Formular ohne eigenes Backend nutze z. B. Formspree / Getform / Netlify Forms.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <footer aria-label="Footer">
+      <div class="footer-grid">
+        <div>© <span id="y"></span> Paar-Intensiv (Team)</div>
+        <div style="display:flex; gap:14px; flex-wrap:wrap;">
+          <a href="#setup">Rollen & Verantwortung</a>
+          <a href="#" onclick="alert('Impressum-Link hier einfügen'); return false;">Impressum</a>
+          <a href="#" onclick="alert('Datenschutz-Link hier einfügen'); return false;">Datenschutz</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById("y").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
