@@ -21,6 +21,80 @@
       --maxw: 1120px;
     }
 
+    /* ===== HERO IMAGE ===== */
+
+.hero-image{
+  position: relative;
+  min-height: 82vh;
+  display: flex;
+  align-items: flex-end;
+  padding: 0;
+  background-image:
+    url("https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=2000&q=80");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-overlay{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(
+      to top,
+      rgba(15,22,22,.78) 0%,
+      rgba(15,22,22,.55) 35%,
+      rgba(15,22,22,.25) 65%,
+      rgba(15,22,22,.05) 100%
+    );
+}
+
+.hero-stage{
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding-bottom: clamp(36px, 6vw, 72px);
+}
+
+.hero-content{
+  max-width: 760px;
+  color: #fff;
+}
+
+.hero-content .headline{
+  color:#fff;
+  text-shadow: 0 12px 40px rgba(0,0,0,.45);
+}
+
+.hero-content .subhead{
+  color: rgba(255,255,255,.85);
+}
+
+.hero-content .pill{
+  background: rgba(255,255,255,.15);
+  border-color: rgba(255,255,255,.25);
+  color: rgba(255,255,255,.9);
+}
+
+.hero-content .btn-ghost{
+  color:#fff;
+  border-color: rgba(255,255,255,.35);
+  background: rgba(255,255,255,.08);
+}
+
+.hero-content .btn-ghost:hover{
+  background: rgba(255,255,255,.18);
+}
+
+/* Mobile */
+@media (max-width: 720px){
+  .hero-image{
+    min-height: 88vh;
+    align-items: flex-end;
+  }
+}
+
+
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{
@@ -388,60 +462,35 @@
 
   <main class="container">
     <!-- HERO -->
-    <header class="hero">
-      <div class="hero-grid">
-        <div>
-          <h1 class="headline">Wenn Reden nicht mehr weiterhilft – aber Aufgeben noch keine Option ist.</h1>
-          <p class="subhead">
-            Ein <strong>moderierter Paar-Intensivtag</strong>, der festgefahrene Gespräche entwirrt und Entscheidungen möglich macht.
-            Im Team mit einer <strong>approbierten Psychotherapeutin</strong>.
-          </p>
+   <header class="hero hero-image">
+  <div class="hero-overlay"></div>
 
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="#kontakt">Erstgespräch anfragen (20 Min)</a>
-            <a class="btn btn-ghost" href="#format">So funktioniert’s</a>
-          </div>
+  <div class="container hero-stage">
+    <div class="hero-content">
+      <h1 class="headline">
+        Wenn Reden nicht mehr weiterhilft –<br>
+        aber Aufgeben noch keine Option ist.
+      </h1>
 
-          <div class="meta" role="list" aria-label="Hinweise">
-            <span class="pill" role="listitem"><span class="dot" aria-hidden="true"></span> Privat • Diskret • begrenzte Plätze</span>
-            <span class="pill" role="listitem">Keine Kassenleistung</span>
-            <span class="pill" role="listitem">1 Tag oder 2 Halbtage</span>
-          </div>
-        </div>
+      <p class="subhead">
+        Ein <strong>moderierter Paar-Intensivtag</strong>, der Klarheit schafft
+        und Entscheidungen möglich macht.<br>
+        Im Team mit einer <strong>approbierten Psychotherapeutin</strong>.
+      </p>
 
-        <aside class="panel" aria-label="Worum es geht">
-          <h3>Worum es hier wirklich geht</h3>
-          <p>
-            Nicht um Schuld. Nicht um „Wer hat recht“. Sondern um Klarheit:
-            Was läuft zwischen euch ab – und was braucht es, damit Veränderung möglich wird?
-          </p>
-
-          <div class="key" aria-label="Kernelemente">
-            <div class="row">
-              <div class="ico" aria-hidden="true">K</div>
-              <div>
-                <strong>Klarer Rahmen</strong>
-                <span>Strukturierte Gesprächsführung statt Endlosschleifen.</span>
-              </div>
-            </div>
-            <div class="row">
-              <div class="ico" aria-hidden="true">R</div>
-              <div>
-                <strong>Ruhiger Prozess</strong>
-                <span>Entschleunigt, fokussiert, ohne Drama – aber nicht weichgespült.</span>
-              </div>
-            </div>
-            <div class="row">
-              <div class="ico" aria-hidden="true">E</div>
-              <div>
-                <strong>Entscheidungsfähigkeit</strong>
-                <span>Am Ende steht Orientierung: weiter, anders, oder klar getrennt.</span>
-              </div>
-            </div>
-          </div>
-        </aside>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#kontakt">Erstgespräch anfragen (20 Min)</a>
+        <a class="btn btn-ghost" href="#format">So funktioniert’s</a>
       </div>
-    </header>
+
+      <div class="meta">
+        <span class="pill">Privat · Diskret · Begrenzte Plätze</span>
+        <span class="pill">Keine Kassenleistung</span>
+        <span class="pill">1 Tag oder 2 Halbtage</span>
+      </div>
+    </div>
+  </div>
+</header>
 
     <!-- PROBLEM -->
     <section id="format" aria-label="Format">
